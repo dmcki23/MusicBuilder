@@ -4,28 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53a4c0c6-305e-439c-8935-8ab7d8b9c6a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/MusicBuilder_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MusicBuilder.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Cadence.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Converters.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MainPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Measure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Note.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Part.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PartGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/README.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Rhythm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Scales.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SheetOfMusic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/XMLtag.java" afterDir="false" />
+    <list default="true" id="53a4c0c6-305e-439c-8935-8ab7d8b9c6a2" name="Changes" comment="check in">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +79,19 @@
       <option name="presentableId" value="Default" />
       <updated>1720729577065</updated>
     </task>
+    <task id="LOCAL-00001" summary="check in">
+      <option name="closed" value="true" />
+      <created>1720849353421</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1720849353421</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="check in" />
+    <option name="LAST_COMMIT_MESSAGE" value="check in" />
   </component>
 </project>
