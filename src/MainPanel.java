@@ -88,14 +88,7 @@ public class MainPanel extends JPanel{
      * How many measures in between key changes, if applicable
      */
     JComboBox keyChangeFrequency;
-    /**
-     * Number of strings on bass, currently not used
-     */
-    JComboBox numberStrings;
-    /**
-     * Add a third clef, currently not used
-     */
-    JComboBox addClef;
+
     /**
      * Whether to do drop D on the instrument, on non-guitar instruments, it's drop whatever the bottom string is
      */
@@ -125,14 +118,7 @@ public class MainPanel extends JPanel{
         instument.addItem("Cello");
         instument.addItem("Viola");
         instument.addItem("Violin");
-        ///instument.addItem("5 string bass with sub bass clef");
-        //instument.addItem("Cello with sub bass clef");
-//        instument.addItem("Sub bass, bass with custom limits");
-//        instument.addItem("Sub bass, bass, treble with custom limits");
-//        instument.addItem("Sub bass to soprano with custom limits");
-//        instument.addItem("Bass, treble with custom limits");
-//        instument.addItem("Bass, treble, soprano with custom limits");
-//        instument.addItem("Treble, soprano with custom limits");
+
         instument.setSelectedIndex(0);
 
 
@@ -236,12 +222,7 @@ public class MainPanel extends JPanel{
 
                 }
         });
-        addClef = new JComboBox();
-        addClef.addItem("Bass and treblef");
-        addClef.addItem("Add clef below bass");
-        numberStrings = new JComboBox();
-        numberStrings.addItem(4);
-        numberStrings.addItem(5);
+
         keyChangeFrequency = new JComboBox();
         for (int power = 1; power < 32; power++){
             keyChangeFrequency.addItem(power);
@@ -268,19 +249,6 @@ public class MainPanel extends JPanel{
 
 
 
-//        numberStrings.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                lowerBox.removeAllItems();
-//                for (int spot = 0; spot < 8; spot++){
-//                    if ((int)numberStrings.getSelectedItem() == 4) {
-//                        lowerBox.addItem(stringNotes[spot]);
-//                    } else {
-//                        lowerBox.addItem(fifthStringNotes[spot]);
-//                    }
-//                }
-//            }
-//        });
         keyBox = new JComboBox();
         for (int numSharps = -7; numSharps < 8; numSharps++){
             keyBox.addItem(numSharps);
@@ -392,8 +360,7 @@ public class MainPanel extends JPanel{
         this.add(restFrequency);
         this.add(new JLabel("How many measures between key modulations"));
         this.add(keyChangeFrequency);
-        this.add(new JLabel("Two or three clefs"));
-        this.add(addClef);
+
         this.add(new JLabel("In the directory this program is in"));
         this.add(refresh);
         frame.add(this);
