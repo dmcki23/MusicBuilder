@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53a4c0c6-305e-439c-8935-8ab7d8b9c6a2" name="Changes" comment="everything checks out, but could not at all get a baritone clef going properly so it's all on treble and bass and viola on alto">
+    <list default="true" id="53a4c0c6-305e-439c-8935-8ab7d8b9c6a2" name="Changes" comment="adding the jar to the git">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/LICENSE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +128,23 @@
       <option name="project" value="LOCAL" />
       <updated>1720928234346</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="changes">
+      <option name="closed" value="true" />
+      <created>1720928782320</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1720928782320</updated>
+    </task>
+    <task id="LOCAL-00008" summary="adding the jar to the git">
+      <option name="closed" value="true" />
+      <created>1720929025928</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1720929025928</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +162,8 @@
     <MESSAGE value="check in" />
     <MESSAGE value="first upload to github" />
     <MESSAGE value="everything checks out, but could not at all get a baritone clef going properly so it's all on treble and bass and viola on alto" />
-    <option name="LAST_COMMIT_MESSAGE" value="everything checks out, but could not at all get a baritone clef going properly so it's all on treble and bass and viola on alto" />
+    <MESSAGE value="changes" />
+    <MESSAGE value="adding the jar to the git" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding the jar to the git" />
   </component>
 </project>
