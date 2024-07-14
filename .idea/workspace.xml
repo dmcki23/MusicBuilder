@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53a4c0c6-305e-439c-8935-8ab7d8b9c6a2" name="Changes" comment="adding the jar to the git" />
+    <list default="true" id="53a4c0c6-305e-439c-8935-8ab7d8b9c6a2" name="Changes" comment="updating the jar">
+      <change beforePath="$PROJECT_DIR$/src/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/LICENSE.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -153,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720929424268</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="updating the jar">
+      <option name="closed" value="true" />
+      <created>1720931149664</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1720931149665</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,6 +183,7 @@
     <MESSAGE value="everything checks out, but could not at all get a baritone clef going properly so it's all on treble and bass and viola on alto" />
     <MESSAGE value="changes" />
     <MESSAGE value="adding the jar to the git" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding the jar to the git" />
+    <MESSAGE value="updating the jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating the jar" />
   </component>
 </project>
