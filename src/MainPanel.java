@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -14,6 +16,14 @@ import javax.swing.JPanel;
  * beginnings of a GUI for this program
  */
 public class MainPanel extends JPanel{
+    String[] stringNotes = new String[]{"E","F","G","A","B","C","D","E"};
+    String[] highStringNotes =new String[]{"G","A","B","C","D","E","F","G","A","B","C"};
+    String[] fifthStringNotes = new String[]{"B","C","D","E","F","G","A","B"};
+    String[] guitarHighNotes = new String[]{"E","F","G","A","B","C","D","E","F","G","A","B","C"};
+    String[] majorGNotes = new String[]{"G","A","B","C","D","E","F","G"};
+    String[] violaCelloLow = new String[]{"C","D","E","F","G","A","B","C"};
+    String[] violaCelloHigh = new String[]{"A","B","C","D","E","F","G","A","B","C","D"};
+    int[] usedClefs;
     /**
      * Lower left hand corner of fretboard to work with
      */
@@ -42,16 +52,149 @@ public class MainPanel extends JPanel{
      * Swing selection box for the key
      */
     JComboBox keyBox;
+    JComboBox instument;
     /**
      * Swing rest frequency selection
      */
     JComboBox restFrequency;
     JComboBox keyChangeFrequency;
+    JComboBox numberStrings;
+    JComboBox addClef;
+    JCheckBox dropD;
+    int low;
+    int high;
+
+
     /**
      * GUI logic here
      */
 
     public MainPanel() {
+        dropD = new JCheckBox();
+        usedClefs = new int[4];
+        instument = new JComboBox();
+        instument.addItem("4 string bass guitar");
+        instument.addItem("5 string bass guitar");
+        instument.addItem("6 string guitar");
+
+        instument.addItem("Cello");
+        instument.addItem("Viola");
+        instument.addItem("Violin");
+        ///instument.addItem("5 string bass with sub bass clef");
+        //instument.addItem("Cello with sub bass clef");
+//        instument.addItem("Sub bass, bass with custom limits");
+//        instument.addItem("Sub bass, bass, treble with custom limits");
+//        instument.addItem("Sub bass to soprano with custom limits");
+//        instument.addItem("Bass, treble with custom limits");
+//        instument.addItem("Bass, treble, soprano with custom limits");
+//        instument.addItem("Treble, soprano with custom limits");
+        instument.setSelectedIndex(0);
+
+
+
+
+        instument.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lowerBox.removeAllItems();
+                upperBox.removeAllItems();
+                int index = instument.getSelectedIndex();
+                switch (index) {
+                    case 0:
+                        for (int spot = 0; spot < highStringNotes.length; spot++) {
+                            upperBox.addItem(highStringNotes[spot]);
+                        }
+                        for (int spot = 0; spot < stringNotes.length; spot++) {
+                            lowerBox.addItem(stringNotes[spot]);
+                        }
+                        usedClefs = new int[]{1, 1, 0};
+                        low = 0;
+                        high = 9;
+                        break;
+
+
+                    case 1:
+                        for (int spot = 0; spot < highStringNotes.length; spot++) {
+                            upperBox.addItem(highStringNotes[spot]);
+                        }
+                        for (int spot = 0; spot < fifthStringNotes.length; spot++) {
+                            lowerBox.addItem(fifthStringNotes[spot]);
+                        }
+                        usedClefs = new int[]{1, 1, 0};
+                        low = -3;
+                        high = 9;
+                        break;
+
+
+                    case 2:
+                        for (int spot = 0; spot < guitarHighNotes.length; spot++ ){
+                            upperBox.addItem(guitarHighNotes[spot]);
+                        }
+                        for (int spot = 0; spot < stringNotes.length; spot++){
+                            lowerBox.addItem(stringNotes[spot]);
+                        }
+                        //dummy code because otherwise the switch statement won't let me have 2 and 4 the exact same
+                        usedClefs = new int[]{0,1,1,0};
+                        low = 7;
+                        high = 21;
+                        break;
+                    case 3:
+                        for (int spot = 0; spot < violaCelloLow.length; spot++ ){
+                            lowerBox.addItem(violaCelloLow[spot]);
+                        }
+                        for (int spot = 0; spot < violaCelloHigh.length; spot++){
+                            upperBox.addItem(violaCelloHigh[spot]);
+                        }
+                        low = -2;
+                        high = 11;
+                        break;
+
+
+//                        usedClefs = new int[]{0,1,1,1};
+//                        low = 7;
+//                        high = 21;
+//                        break;
+                    case 4:
+                        for (int spot = 0; spot < violaCelloLow.length; spot++ ){
+                            lowerBox.addItem(violaCelloLow[spot]);
+                        }
+                        for (int spot = 0; spot < violaCelloHigh.length; spot++){
+                            upperBox.addItem(violaCelloHigh[spot]);
+                        }
+                        low = 5;
+                        high = 14;
+                        break;
+                    case 5:
+                        for (int spot = 0; spot < majorGNotes.length; spot++ ){
+                            lowerBox.addItem(majorGNotes[spot]);
+                        }
+                        for (int spot = 0; spot < stringNotes.length; spot++){
+                            upperBox.addItem(stringNotes[spot]);
+                        }
+                        low = 9;
+                        high = 18;
+                        break;
+                    case 6:
+                        for (int spot = 0; spot < highStringNotes.length; spot++) {
+                            upperBox.addItem(highStringNotes[spot]);
+                        }
+                        for (int spot = 0; spot < fifthStringNotes.length; spot++) {
+                            lowerBox.addItem(fifthStringNotes[spot]);
+                        }
+                        usedClefs = new int[]{1, 1, 1};
+                        low = -3;
+                        high = 9;
+                        break;
+                }
+
+                }
+        });
+        addClef = new JComboBox();
+        addClef.addItem("Bass and treblef");
+        addClef.addItem("Add clef below bass");
+        numberStrings = new JComboBox();
+        numberStrings.addItem(4);
+        numberStrings.addItem(5);
         keyChangeFrequency = new JComboBox();
         for (int power = 1; power < 32; power++){
             keyChangeFrequency.addItem(power);
@@ -67,7 +210,7 @@ public class MainPanel extends JPanel{
         upperBox = new JComboBox();
         typeBeat = new JComboBox();
         numBeat = new JComboBox();
-        refresh = new JButton("Refresh");
+        refresh = new JButton("file: output.musicXML");
         for (int num = 1; num < 20; num++){
             numBeat.addItem(num);
         }
@@ -75,13 +218,22 @@ public class MainPanel extends JPanel{
         typeBeat.addItem("half");
         typeBeat.addItem("quarter");
         typeBeat.addItem("eighth");
-        String[] stringNotes = new String[]{"E","F","G","A","B","C","D"};
-        String[] highStringNotes =new String[]{"A","B","C","D","E","F","G","A"};
 
-        for (int spot = 0; spot < 7; spot++){
-            lowerBox.addItem(stringNotes[spot]);
-            upperBox.addItem(highStringNotes[spot]);
-        }
+
+
+//        numberStrings.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                lowerBox.removeAllItems();
+//                for (int spot = 0; spot < 8; spot++){
+//                    if ((int)numberStrings.getSelectedItem() == 4) {
+//                        lowerBox.addItem(stringNotes[spot]);
+//                    } else {
+//                        lowerBox.addItem(fifthStringNotes[spot]);
+//                    }
+//                }
+//            }
+//        });
         keyBox = new JComboBox();
         for (int numSharps = -7; numSharps < 8; numSharps++){
             keyBox.addItem(numSharps);
@@ -91,11 +243,17 @@ public class MainPanel extends JPanel{
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //sheetOfMusic = new SheetOfMusic();
                 int divisions = 2;
                 int type = (int)Math.pow(2,typeBeat.getSelectedIndex());
                 int num = numBeat.getSelectedIndex()+1;
-                int lower = lowerBox.getSelectedIndex();
-                int upper = upperBox.getSelectedIndex()+10;
+                int lower = lowerBox.getSelectedIndex()+low;
+                int upper = upperBox.getSelectedIndex()+high;
+                int in = instument.getSelectedIndex();
+                if (dropD.isSelected()){
+                    lower -= 1;
+                }
+
                 int key =keyBox.getSelectedIndex()-7;
                 int restChance = restFrequency.getSelectedIndex()+2;
                 int modFreq = (int)keyChangeFrequency.getSelectedItem();
@@ -105,16 +263,56 @@ public class MainPanel extends JPanel{
                     key = 0;
                 }
                 //sheetOfMusic.partList = sheetOfMusic.pg.generateBass();
-                sheetOfMusic.partList = sheetOfMusic.pg.generateBass(lower,upper,key,randomKeys,type,num,restChance, modFreq);
+//                if (instument.getSelectedIndex() == 0 || instument.getSelectedIndex() == 2 || instument.getSelectedIndex() == 4){
+//                    sheetOfMusic.partList = sheetOfMusic.pg.generateBass(lower,upper,key,randomKeys,type,num,restChance, modFreq);
+//                } else {
+//                    sheetOfMusic.partList = sheetOfMusic.pg.generateBassFiveString(lower,upper,key,randomKeys,type,num,restChance, modFreq);
+//                }
+                switch (in){
+                    case 0:
+                        sheetOfMusic.partList = sheetOfMusic.pg.generateBass(lower,upper,key,randomKeys,type,num,restChance, modFreq);
+                        break;
+
+                    case 1:
+                        sheetOfMusic.partList = sheetOfMusic.pg.generateBass(lower,upper,key,randomKeys,type,num,restChance, modFreq);
+                        break;
+
+                    case 2:
+                        sheetOfMusic.partList = sheetOfMusic.pg.generateBass(lower,upper,key,randomKeys,type,num,restChance, modFreq);
+                        break;
+                    case 3:
+                        sheetOfMusic.partList = sheetOfMusic.pg.generateBass(lower,upper,key,randomKeys,type,num,restChance, modFreq);
+                        break;
+
+                    case 4:
+                        sheetOfMusic.partList = sheetOfMusic.pg.generateBass(lower,upper,key,randomKeys,type,num,restChance, modFreq,3);
+                            break;
+                    case 5:
+                        sheetOfMusic.partList = sheetOfMusic.pg.generateBass(lower,upper,key,randomKeys,type,num,restChance, modFreq);
+                        break;
+
+                    case 6:
+                        sheetOfMusic.partList = sheetOfMusic.pg.generateBassFiveString(lower, upper, key,randomKeys,type,num,restChance,modFreq);
+                        break;
+                }
                 sheetOfMusic.outputXML();
 
             }
         });
+        instument.setSelectedIndex(0);
+        for (int spot = 0; spot < highStringNotes.length; spot++) {
+            upperBox.addItem(highStringNotes[spot]);
+        }
+        for (int spot = 0; spot < stringNotes.length; spot++) {
+            lowerBox.addItem(stringNotes[spot]);
+        }
+        usedClefs = new int[]{1, 1, 0};
+        low = 0;
+        high = 9;
 
 
-
-        lowerBox.setSelectedIndex(0);
-        upperBox.setSelectedIndex(6);
+        //lowerBox.setSelectedIndex(0);
+        //upperBox.setSelectedIndex(6);
         typeBeat.setSelectedIndex(3);
         numBeat.setSelectedIndex(3);
         restFrequency.setSelectedIndex(4);
@@ -122,25 +320,38 @@ public class MainPanel extends JPanel{
         keyChangeFrequency.setSelectedIndex(11);
         JFrame frame = new JFrame();
         frame.getContentPane().add(this);
+        frame.setSize(700, 500);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new GridLayout(20,2));
-        frame.setSize(500, 500);
-        frame.add(new JLabel("Bottom left hand corner"));
-        frame.add(lowerBox);
-        frame.add(new JLabel("Upper right hand corner"));
-        frame.add(upperBox);
-        frame.add(new JLabel("Number of beats, top time signature number"));
-        frame.add(numBeat);
-        frame.add(new JLabel("Type of beat, bottom time signature number"));
-        frame.add(typeBeat);
-        frame.add(new JLabel("Key"));
-        frame.add(keyBox);
-        frame.add(new JLabel("Chance of a note being a rest note"));
-        frame.add(restFrequency);
-        frame.add(new JLabel("How many measures between key modulations"));
-        frame.add(keyChangeFrequency);
-        frame.add(new JLabel("Outputs to output.musicXML in the directory this program is in"));
-        frame.add(refresh);
+        this.setLayout(new GridLayout(0,2));
+        //this.add(new JLabel(" "));
+        //this.add(new JLabel("Number of strings"));
+        //this.add(numberStrings);
+        this.add(new JLabel("Instrument"));
+        this.add(instument);
+        this.add(new JLabel("Drop D"));
+        this.add(dropD);
+        this.add(new JLabel("Bottom left hand corner"));
+        this.add(lowerBox);
+        this.add(new JLabel("Upper right hand corner"));
+        this.add(upperBox);
+        this.add(new JLabel("Number of beats, top time signature number"));
+        this.add(numBeat);
+        this.add(new JLabel("Type of beat, bottom time signature number"));
+        this.add(typeBeat);
+        this.add(new JLabel("Key"));
+        this.add(keyBox);
+        this.add(new JLabel("Chance of a note being a rest note"));
+        this.add(restFrequency);
+        this.add(new JLabel("How many measures between key modulations"));
+        this.add(keyChangeFrequency);
+        this.add(new JLabel("Two or three clefs"));
+        this.add(addClef);
+        this.add(new JLabel("In the directory this program is in"));
+        this.add(refresh);
+        frame.add(this);
+        frame.pack();
+        //frame.add(new JLabel());
         frame.setVisible(true);
         repaint();
 

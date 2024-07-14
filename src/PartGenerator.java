@@ -22,6 +22,7 @@ public class PartGenerator {
     int chunkLength;
     int[][] outfirst;
 
+
     /**
      * Currently empty
      */
@@ -46,7 +47,7 @@ public class PartGenerator {
         int[] divisions = new int[6];
         for (int m = 0; m < 4; m++) {
             newMeasure = new Measure(Integer.toString(m + 1), 2, 0, 6, 8, "F", 2);
-            newMeasure.staves = "2";
+            //newMeasure.staves = "2";
             newMeasure.clefLines = new String[]{"4", "2"};
             newMeasure.clefSigns = new String[]{"G", "F"};
             activeNote = new Note();
@@ -66,7 +67,7 @@ public class PartGenerator {
         int currentKeyFifths = 0;
         for (int m = 0; m < 512; m++) {
             newMeasure = new Measure(Integer.toString(m + 5), 2, 0, 6, 8, "F", 2);
-            newMeasure.staves = "2";
+            //newMeasure.staves = "2";
             newMeasure.clefLines = new String[]{"4", "2"};
             newMeasure.clefSigns = new String[]{"G", "F"};
             newMeasure.keyFifths = currentKeyFifths;
@@ -188,9 +189,9 @@ public class PartGenerator {
         Note tieNote = new Note();
         int[] divisions = new int[6];
         for (int m = 0; m < 4; m++) {
-            newMeasure = new Measure(Integer.toString(m + 1), 2, 0, inbeats, intype, "F", 2);
+            newMeasure = new Measure(Integer.toString(m + 1), 2, 0, inbeats, intype, "F", 4,2);
             newMeasure.staves = "2";
-            newMeasure.clefLines = new String[]{"4", "2"};
+            newMeasure.clefLines = new String[]{"2", "4"};
             newMeasure.clefSigns = new String[]{"G", "F"};
             activeNote = new Note();
             activeNote.type = 1;
@@ -209,15 +210,14 @@ public class PartGenerator {
         int currentKeyFifths = key;
         for (int m = 0; m < 512; m++) {
 
-            newMeasure = new Measure(Integer.toString(m + 5), 2, currentKeyFifths, inbeats, intype, "F", 2);
+            newMeasure = new Measure(Integer.toString(m + 5), 2, currentKeyFifths, inbeats, intype, "F", 4,2);
             newMeasure.staves = "2";
-            newMeasure.clefLines = new String[]{"4", "2"};
+            newMeasure.clefLines = new String[]{"2", "4"};
             newMeasure.clefSigns = new String[]{"G", "F"};
             newMeasure.keyFifths = currentKeyFifths;
             if (m % modFrequency == 0 && m > 0 && random){
                 newMeasure.keyFifths = rand.nextInt(-7,8);
-                //newMeasure.keyFifths = 4;
-                //currentKeyFifths = newMeasure.keyFifths;
+                currentKeyFifths = newMeasure.keyFifths;
             }
             int index = 0;
             while (index < inbeats) {
@@ -291,11 +291,19 @@ public class PartGenerator {
                     } else if (newPitchAddress > 4 && newPitchAddress <= 11){
                         activeNote.pitchOctave = 3;
                         tieNote.pitchOctave = 3;
-                    } else if (newPitchAddress > 18){
+                    } else if (newPitchAddress > 18 && newPitchAddress <= 25){
                         activeNote.pitchOctave = 5;
                         tieNote.pitchOctave = 5;
+                    } else if (newPitchAddress > 25){
+                        activeNote.pitchOctave = 6;
+                        tieNote.pitchOctave = 6;
+                    } else if (newPitchAddress <= -3 ){
+                        activeNote.pitchOctave = 1;
+                        activeNote.pitchOctave = 1;
                     }
-                    activeNote.pitchStep = newPitchAddress + 3 - 7 * (activeNote.pitchOctave - 2);
+                    activeNote.pitchStep = ((((newPitchAddress + 2 - 7 * (activeNote.pitchOctave - 2))+21) % 8)+1);
+                    activeNote.pitchStep = (((newPitchAddress+3+21)%7)+1);
+
                     tieNote.pitchStep = activeNote.pitchStep;
                 }
                 newMeasure.noteList.add(activeNote);
@@ -308,6 +316,478 @@ public class PartGenerator {
         outPart.add(currPart);
         return outPart;
     }
+    /**
+     * Generates the music for a bass guitar
+     * @param lower bottom left hand corner of fretboard to work with
+     * @param upper upper right hand corner of fretboard to work with
+     * @param key key to work with
+     * @param random if false it is all the selected key, if true it modulates every so often
+     * @param intype type of beat in time signature
+     * @param inbeats number of beats in time signature
+     * @param restChance chance of a note being a rest, 1/restChance
+     * @param modFrequency how many measures between key modulation, if random is true
+     * @return Part list
+     */
+    public List<Part> generateBass(int lower, int upper, int key, boolean random, int intype, int inbeats, int restChance, int modFrequency, int clef) {
+        List<Part> outPart = new ArrayList<>();
+        String[] allClefLines = new String[]{"4","2","2","5"};
+        String[] allClefStrings = new String[]{"G","F","F","C"};
+        Part currPart = new Part();
+        timebeats = inbeats;
+        timetype = intype;
+        Random rand = new Random();
+        Measure newMeasure = new Measure();
+        chunkLength = inbeats;
+        Note activeNote = new Note();
+        Note tieNote = new Note();
+        int[] divisions = new int[6];
+        for (int m = 0; m < 4; m++) {
+            newMeasure = new Measure(Integer.toString(m + 1), 2, 0, inbeats, intype, allClefStrings[clef], Integer.parseInt(allClefLines[clef]),1);
+            newMeasure.staves = "1";
+            newMeasure.clefLines = Arrays.copyOfRange(allClefLines,clef,clef+1);;
+            newMeasure.clefSigns = Arrays.copyOfRange(allClefStrings,clef,clef+1);
+            activeNote = new Note();
+            activeNote.type = 1;
+            activeNote.pitchOctave = 3;
+            activeNote.pitchStep = 5;
+            newMeasure.noteList.add(activeNote);
+            for (int n = 1; n < inbeats; n++) {
+                activeNote = new Note();
+                activeNote.type = 1;
+                activeNote.pitchOctave = 3;
+                activeNote.pitchStep = 1;
+                newMeasure.noteList.add(activeNote);
+            }
+            currPart.measureList.add(newMeasure);
+        }
+        int currentKeyFifths = key;
+        for (int m = 0; m < 512; m++) {
+
+            newMeasure = new Measure(Integer.toString(m + 5), 2, currentKeyFifths, inbeats, intype, allClefStrings[clef], Integer.parseInt(allClefLines[clef]),1);
+            newMeasure.staves = "1";
+            newMeasure.clefSigns = new String[]{allClefStrings[clef]};
+            newMeasure.clefLines = new String[]{allClefLines[clef]};
+//            newMeasure.clefLines = Arrays.copyOfRange(allClefLines,clef,clef+1);;
+//            newMeasure.clefSigns = Arrays.copyOfRange(allClefStrings,clef,clef+1);
+            newMeasure.keyFifths = currentKeyFifths;
+            if (m % modFrequency == 0 && m > 0 && random){
+                newMeasure.keyFifths = rand.nextInt(-7,8);
+                currentKeyFifths = newMeasure.keyFifths;
+            }
+            int index = 0;
+            while (index < inbeats) {
+                activeNote = new Note();
+                activeNote.restNote = false;
+                activeNote.dot = false;
+                tieNote = new Note();
+                tieNote.restNote = false;
+                tieNote.dot = false;
+                int a = 0;
+                if (index == inbeats-1) {
+                    a = 1;
+                } else {
+                    a = rand.nextInt(1, (inbeats+1) - index);
+                }
+                newMeasure.aList[index] = a;
+                index += a;
+                if (a == 1) {
+                    activeNote.type = 1;
+                }
+                if (a == 8) {
+                    activeNote.type = 4;
+                }
+                if (a == 2) {
+                    activeNote.type = 2;
+                }
+                if (a == 4) {
+                    activeNote.type = 3;
+                }
+                if (a == 3) {
+                    activeNote.type = 2;
+                    activeNote.dot = true;
+                }
+                if (a == 5) {
+                    activeNote.type = 3;
+                    tieNote.type = 1;
+                }
+                if (a == 6) {
+                    activeNote.type = 3;
+                    activeNote.dot = true;
+                }
+                //activeNote.duration = a;
+                int restOrNot = rand.nextInt(0, restChance);
+                if (restOrNot == 1) {
+                    activeNote.restNote = true;
+                    if (a == 5) {
+                        tieNote.restNote = true;
+                    } else if (a == 3) {
+                        tieNote.dot = false;
+                        tieNote.restNote = true;
+                        tieNote.type = 1;
+                        activeNote.dot = false;
+                        activeNote.restNote = true;
+                        activeNote.type = 2;
+                    } else if (a == 6) {
+                        tieNote.restNote = true;
+                        tieNote.dot = false;
+                        tieNote.type = 2;
+                        activeNote.dot = false;
+                    }
+                } else {
+                    activeNote.restNote = false;
+                    tieNote.restNote = false;
+                    int newPitchAddress = rand.nextInt(lower, upper);
+                    if (newPitchAddress > 11 && newPitchAddress <= 18) {
+                        activeNote.pitchOctave = 4;
+                        tieNote.pitchOctave = 4;
+                    } else if (newPitchAddress <= 4) {
+                        activeNote.pitchOctave = 2;
+                        tieNote.pitchOctave = 2;
+                    } else if (newPitchAddress > 4 && newPitchAddress <= 11){
+                        activeNote.pitchOctave = 3;
+                        tieNote.pitchOctave = 3;
+                    } else if (newPitchAddress > 18 && newPitchAddress <= 25){
+                        activeNote.pitchOctave = 5;
+                        tieNote.pitchOctave = 5;
+                    } else if (newPitchAddress > 25){
+                        activeNote.pitchOctave = 6;
+                        tieNote.pitchOctave = 6;
+                    } else if (newPitchAddress <= -3){
+                        activeNote.pitchOctave = 1;
+                        tieNote.pitchOctave = 1;
+
+                    }
+                    activeNote.pitchStep = (((newPitchAddress + 2 - 7 * (activeNote.pitchOctave - 2))+21)%8)+1;
+                    activeNote.pitchStep = (((newPitchAddress+3+21)%7)+1);
+                    tieNote.pitchStep = activeNote.pitchStep;
+                }
+                newMeasure.noteList.add(activeNote);
+                if (a == 5 || (a == 3 && activeNote.restNote) || (a == 6 && activeNote.restNote)) {
+                    newMeasure.noteList.add(tieNote);
+                }
+            }
+            currPart.measureList.add(newMeasure);
+        }
+        outPart.add(currPart);
+        return outPart;
+    }
+    /**
+     * Generates the music for a bass guitar
+     * @param lower bottom left hand corner of fretboard to work with
+     * @param upper upper right hand corner of fretboard to work with
+     * @param key key to work with
+     * @param random if false it is all the selected key, if true it modulates every so often
+     * @param intype type of beat in time signature
+     * @param inbeats number of beats in time signature
+     * @param restChance chance of a note being a rest, 1/restChance
+     * @param modFrequency how many measures between key modulation, if random is true
+     * @return Part list
+     */
+    public List<Part> generateBassFiveString(int lower, int upper, int key, boolean random, int intype, int inbeats, int restChance, int modFrequency) {
+        List<Part> outPart = new ArrayList<>();
+        Part currPart = new Part();
+        timebeats = inbeats;
+        timetype = intype;
+        Random rand = new Random();
+        Measure newMeasure = new Measure();
+        chunkLength = inbeats;
+        Note activeNote = new Note();
+        Note tieNote = new Note();
+        int[] divisions = new int[6];
+        for (int m = 0; m < 4; m++) {
+            newMeasure = new Measure(Integer.toString(m + 1), 2, 0, inbeats, intype, "F", 4,3);
+            newMeasure.staves = "3";
+            newMeasure.clefLines = new String[]{"2", "4","3"};
+            newMeasure.clefSigns = new String[]{"G", "F","F"};
+            activeNote = new Note();
+            activeNote.type = 1;
+            activeNote.pitchOctave = 3;
+            activeNote.pitchStep = 5;
+            newMeasure.noteList.add(activeNote);
+            for (int n = 1; n < inbeats; n++) {
+                activeNote = new Note();
+                activeNote.type = 1;
+                activeNote.pitchOctave = 3;
+                activeNote.pitchStep = 1;
+                newMeasure.noteList.add(activeNote);
+            }
+            currPart.measureList.add(newMeasure);
+        }
+        int currentKeyFifths = key;
+        for (int m = 0; m < 512; m++) {
+
+            newMeasure = new Measure(Integer.toString(m + 5), 2, currentKeyFifths, inbeats, intype, "F", 4,3);
+            newMeasure.staves = "3";
+            newMeasure.clefLines = new String[]{"2", "4","3"};
+            newMeasure.clefSigns = new String[]{"G", "F","F"};
+            newMeasure.keyFifths = currentKeyFifths;
+            if (m % modFrequency == 0 && m > 0 && random){
+                newMeasure.keyFifths = rand.nextInt(-7,8);
+                currentKeyFifths = newMeasure.keyFifths;
+            }
+            int index = 0;
+            while (index < inbeats) {
+                activeNote = new Note();
+                activeNote.restNote = false;
+                activeNote.dot = false;
+                tieNote = new Note();
+                tieNote.restNote = false;
+                tieNote.dot = false;
+                int a = 0;
+                if (index == inbeats-1) {
+                    a = 1;
+                } else {
+                    a = rand.nextInt(1, (inbeats+1) - index);
+                }
+                newMeasure.aList[index] = a;
+                index += a;
+                if (a == 1) {
+                    activeNote.type = 1;
+                }
+                if (a == 8) {
+                    activeNote.type = 4;
+                }
+                if (a == 2) {
+                    activeNote.type = 2;
+                }
+                if (a == 4) {
+                    activeNote.type = 3;
+                }
+                if (a == 3) {
+                    activeNote.type = 2;
+                    activeNote.dot = true;
+                }
+                if (a == 5) {
+                    activeNote.type = 3;
+                    tieNote.type = 1;
+                }
+                if (a == 6) {
+                    activeNote.type = 3;
+                    activeNote.dot = true;
+                }
+                //activeNote.duration = a;
+                int restOrNot = rand.nextInt(0, restChance);
+                if (restOrNot == 1) {
+                    activeNote.restNote = true;
+                    if (a == 5) {
+                        tieNote.restNote = true;
+                    } else if (a == 3) {
+                        tieNote.dot = false;
+                        tieNote.restNote = true;
+                        tieNote.type = 1;
+                        activeNote.dot = false;
+                        activeNote.restNote = true;
+                        activeNote.type = 2;
+                    } else if (a == 6) {
+                        tieNote.restNote = true;
+                        tieNote.dot = false;
+                        tieNote.type = 2;
+                        activeNote.dot = false;
+                    }
+                } else {
+                    activeNote.restNote = false;
+                    tieNote.restNote = false;
+                    int newPitchAddress = rand.nextInt(lower, upper);
+                    if (newPitchAddress > 11 && newPitchAddress <= 18) {
+                        activeNote.pitchOctave = 4;
+                        tieNote.pitchOctave = 4;
+                    } else if (newPitchAddress <= 4) {
+                        activeNote.pitchOctave = 2;
+                        tieNote.pitchOctave = 2;
+                    } else if (newPitchAddress > 4 && newPitchAddress <= 11){
+                        activeNote.pitchOctave = 3;
+                        tieNote.pitchOctave = 3;
+                    } else if (newPitchAddress > 18 && newPitchAddress <= 25){
+                        activeNote.pitchOctave = 5;
+                        tieNote.pitchOctave = 5;
+                    } else if (newPitchAddress > 25 ){
+                        activeNote.pitchOctave = 6;
+                        tieNote.pitchOctave = 6;
+                    }
+                    if (newPitchAddress <= -3 ){
+                        activeNote.pitchOctave = 1;
+                        tieNote.pitchOctave = 1;
+                    }
+                    if (newPitchAddress <= -10){
+                        activeNote.pitchOctave = 0;
+                        tieNote.pitchOctave = 0;
+                    }
+                    activeNote.pitchStep =((( (newPitchAddress + 3 - 7 * (activeNote.pitchOctave - 2))+21)) % 8)+1;
+                    activeNote.pitchStep = (((newPitchAddress+3+21)%7)+1);
+
+                    tieNote.pitchStep = activeNote.pitchStep;
+                }
+                newMeasure.noteList.add(activeNote);
+                if (a == 5 || (a == 3 && activeNote.restNote) || (a == 6 && activeNote.restNote)) {
+                    newMeasure.noteList.add(tieNote);
+                }
+            }
+            currPart.measureList.add(newMeasure);
+        }
+        outPart.add(currPart);
+        return outPart;
+    }
+//    /**
+//     * Generates the music for a bass guitar
+//     * @param lower bottom left hand corner of fretboard to work with
+//     * @param upper upper right hand corner of fretboard to work with
+//     * @param key key to work with
+//     * @param random if false it is all the selected key, if true it modulates every so often
+//     * @param intype type of beat in time signature
+//     * @param inbeats number of beats in time signature
+//     * @param restChance chance of a note being a rest, 1/restChance
+//     * @param modFrequency how many measures between key modulation, if random is true
+//     * @return Part list
+//     */
+//    public List<Part> generateBassFiveString(int lower, int upper, int key, boolean random, int intype, int inbeats, int restChance, int modFrequency, int[] staves) {
+//        int numStaves = 0;
+//        for (int spot = 0; spot < 4; spot++){
+//            if (staves[spot] == 1){
+//                numStaves++;
+//            }
+//        }
+//        String[] allClefSigns = new String[]{"C","G","F","C"};
+//        int[] allClefLines = new int[]{}
+//        String[] clefStrings = new String[numStaves];
+//        int[] clefLineNums = new int[numStaves];
+//        List<Part> outPart = new ArrayList<>();
+//        Part currPart = new Part();
+//        timebeats = inbeats;
+//        timetype = intype;
+//        Random rand = new Random();
+//        Measure newMeasure = new Measure();
+//        chunkLength = inbeats;
+//        Note activeNote = new Note();
+//        Note tieNote = new Note();
+//        int[] divisions = new int[6];
+//        for (int m = 0; m < 4; m++) {
+//            newMeasure = new Measure(Integer.toString(m + 1), 2, 0, inbeats, intype, "F", 4);
+//            newMeasure.staves = "3";
+//            newMeasure.clefLines = new String[]{"2", "4","5"};
+//            newMeasure.clefSigns = new String[]{"G", "F","C"};
+//            activeNote = new Note();
+//            activeNote.type = 1;
+//            activeNote.pitchOctave = 3;
+//            activeNote.pitchStep = 5;
+//            newMeasure.noteList.add(activeNote);
+//            for (int n = 1; n < inbeats; n++) {
+//                activeNote = new Note();
+//                activeNote.type = 1;
+//                activeNote.pitchOctave = 3;
+//                activeNote.pitchStep = 1;
+//                newMeasure.noteList.add(activeNote);
+//            }
+//            currPart.measureList.add(newMeasure);
+//        }
+//        int currentKeyFifths = key;
+//        for (int m = 0; m < 512; m++) {
+//
+//            newMeasure = new Measure(Integer.toString(m + 5), 2, currentKeyFifths, inbeats, intype, "F", 2);
+//            newMeasure.staves = "3";
+//            newMeasure.clefLines = new String[]{"2", "4","5"};
+//            newMeasure.clefSigns = new String[]{"G", "F","C"};
+//            newMeasure.keyFifths = currentKeyFifths;
+//            if (m % modFrequency == 0 && m > 0 && random){
+//                newMeasure.keyFifths = rand.nextInt(-7,8);
+//                currentKeyFifths = newMeasure.keyFifths;
+//            }
+//            int index = 0;
+//            while (index < inbeats) {
+//                activeNote = new Note();
+//                activeNote.restNote = false;
+//                activeNote.dot = false;
+//                tieNote = new Note();
+//                tieNote.restNote = false;
+//                tieNote.dot = false;
+//                int a = 0;
+//                if (index == inbeats-1) {
+//                    a = 1;
+//                } else {
+//                    a = rand.nextInt(1, (inbeats+1) - index);
+//                }
+//                newMeasure.aList[index] = a;
+//                index += a;
+//                if (a == 1) {
+//                    activeNote.type = 1;
+//                }
+//                if (a == 8) {
+//                    activeNote.type = 4;
+//                }
+//                if (a == 2) {
+//                    activeNote.type = 2;
+//                }
+//                if (a == 4) {
+//                    activeNote.type = 3;
+//                }
+//                if (a == 3) {
+//                    activeNote.type = 2;
+//                    activeNote.dot = true;
+//                }
+//                if (a == 5) {
+//                    activeNote.type = 3;
+//                    tieNote.type = 1;
+//                }
+//                if (a == 6) {
+//                    activeNote.type = 3;
+//                    activeNote.dot = true;
+//                }
+//                //activeNote.duration = a;
+//                int restOrNot = rand.nextInt(0, restChance);
+//                if (restOrNot == 1) {
+//                    activeNote.restNote = true;
+//                    if (a == 5) {
+//                        tieNote.restNote = true;
+//                    } else if (a == 3) {
+//                        tieNote.dot = false;
+//                        tieNote.restNote = true;
+//                        tieNote.type = 1;
+//                        activeNote.dot = false;
+//                        activeNote.restNote = true;
+//                        activeNote.type = 2;
+//                    } else if (a == 6) {
+//                        tieNote.restNote = true;
+//                        tieNote.dot = false;
+//                        tieNote.type = 2;
+//                        activeNote.dot = false;
+//                    }
+//                } else {
+//                    activeNote.restNote = false;
+//                    tieNote.restNote = false;
+//                    int newPitchAddress = rand.nextInt(lower, upper);
+//                    if (newPitchAddress > 11 && newPitchAddress <= 18) {
+//                        activeNote.pitchOctave = 4;
+//                        tieNote.pitchOctave = 4;
+//                    } else if (newPitchAddress <= 4) {
+//                        activeNote.pitchOctave = 2;
+//                        tieNote.pitchOctave = 2;
+//                    } else if (newPitchAddress > 4 && newPitchAddress <= 11){
+//                        activeNote.pitchOctave = 3;
+//                        tieNote.pitchOctave = 3;
+//                    } else if (newPitchAddress > 18){
+//                        activeNote.pitchOctave = 5;
+//                        tieNote.pitchOctave = 5;
+//                    }
+//                    if (newPitchAddress <= -3 ){
+//                        activeNote.pitchOctave = 1;
+//                        tieNote.pitchOctave = 1;
+//                    }
+//                    if (newPitchAddress <= -10){
+//                        activeNote.pitchOctave = 0;
+//                        tieNote.pitchOctave = 0;
+//                    }
+//                    activeNote.pitchStep = newPitchAddress + 3 - 7 * (activeNote.pitchOctave - 2);
+//                    tieNote.pitchStep = activeNote.pitchStep;
+//                }
+//                newMeasure.noteList.add(activeNote);
+//                if (a == 5 || (a == 3 && activeNote.restNote) || (a == 6 && activeNote.restNote)) {
+//                    newMeasure.noteList.add(tieNote);
+//                }
+//            }
+//            currPart.measureList.add(newMeasure);
+//        }
+//        outPart.add(currPart);
+//        return outPart;
+//    }
     /**
      * If this is not that semi-musical demo I put on Facebook last year, I'll have to check the archive again
      * @param multin number of something??

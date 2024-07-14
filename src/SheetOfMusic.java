@@ -131,7 +131,7 @@ public class SheetOfMusic {
 
         //System.out.println("here");
         //pg.generateBass();
-        outputXML();
+        //outputXML();
 
         //partList = pg.generateBass();
         //outputXML();

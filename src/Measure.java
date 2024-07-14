@@ -47,6 +47,7 @@ public class Measure {
      *
      */
     List<XMLtag> XMLtaglist;
+    int stavesInt;
     /**
      * List of Note s
      */
@@ -58,20 +59,45 @@ public class Measure {
     /**
      * Number of staves in the measure
      */
-    String staves = "1";
+    String staves;
     /**
      * Bass and treble clef symbols
      */
-    String[] clefSigns = new String[2];
+    String[] clefSigns;
     /**
      * Bass and treble clef line numbers
      */
-    String[] clefLines = new String[2];
+    String[] clefLines;
     /**
      * Initializes the taglist
      */
     Measure() {
         XMLtaglist = new ArrayList<XMLtag>();
+    }
+    /**
+     * Create a measure with parameters
+     * @param partIDin ID of the Part within the SheetOfMusic
+     * @param divisionsIn number of discrete time steps in the measure
+     * @param keyFifthsIn key signature
+     * @param timeBeatsIn number of beats in the time signature
+     * @param timeTypeIn type of beat in the time signature
+     * @param clefSignIn clef symbol to use
+     * @param clefLineIn line to put the clef symbol on
+     */
+    Measure(String partIDin, int divisionsIn, int keyFifthsIn, int timeBeatsIn, int timeTypeIn, String clefSignIn, int clefLineIn, int stavesIn) {
+        inBetween = new ArrayList<XMLtag>();
+        XMLtaglist = new ArrayList<XMLtag>();
+        noteList = new ArrayList<Note>();
+        partID = partIDin;
+        divisions = divisionsIn;
+        keyFifths = keyFifthsIn;
+        timeBeats = timeBeatsIn;
+        timeType = timeTypeIn;
+//        clefSign = clefSignIn;
+//        clefLine = clefLineIn;
+        stavesInt = stavesIn;
+        staves = Integer.toString(stavesIn);
+        System.out.println("Staves: " + staves + " " + partIDin);
     }
     /**
      * Create a measure with parameters
@@ -92,8 +118,8 @@ public class Measure {
         keyFifths = keyFifthsIn;
         timeBeats = timeBeatsIn;
         timeType = timeTypeIn;
-        clefSign = clefSignIn;
-        clefLine = clefLineIn;
+//        clefSign = clefSignIn;
+//        clefLine = clefLineIn;
     }
     /**
      * Outputs the measure in musicXML format
@@ -134,18 +160,9 @@ public class Measure {
         timebeattypetag.text = Integer.toString(timeType);
         timetag.inBetween.add(timebeattypetag);
         attributesTag.inBetween.add(stavesTag);
+        System.out.println("========================Staves: " + Integer.toString(stavesInt));
+        if (stavesInt == 1) {
 
-        if (staves == "1") {
-            XMLtag cleftag = new XMLtag("clef number = \"1\"", 3);
-            XMLtag signtag = new XMLtag("sign", 4);
-            signtag.text = clefSigns[0];
-            cleftag.inBetween.add(signtag);
-            XMLtag linetag = new XMLtag("line", 4);
-            linetag.text = clefLines[0];
-            cleftag.inBetween.add(linetag);
-            attributesTag.inBetween.add(cleftag);
-        }
-        if (staves == "2") {
             XMLtag cleftag = new XMLtag("clef number = \"1\"", 3);
             cleftag.outname = "</clef>";
             XMLtag signtag = new XMLtag("sign", 4);
@@ -155,6 +172,17 @@ public class Measure {
             linetag.text = clefLines[0];
             cleftag.inBetween.add(linetag);
             attributesTag.inBetween.add(cleftag);
+        } else         if (stavesInt== 2) {
+            XMLtag cleftag = new XMLtag("clef number = \"1\"", 3);
+            cleftag.outname = "</clef>";
+            XMLtag signtag = new XMLtag("sign", 4);
+            signtag.text = clefSigns[0];
+            cleftag.inBetween.add(signtag);
+            XMLtag linetag = new XMLtag("line", 4);
+            linetag.text = clefLines[0];
+            cleftag.inBetween.add(linetag);
+            attributesTag.inBetween.add(cleftag);
+
             cleftag = new XMLtag("clef number = \"2\"", 3);
             cleftag.outname = "</clef>";
             signtag = new XMLtag("sign", 4);
@@ -164,7 +192,7 @@ public class Measure {
             linetag.text = clefLines[1];
             cleftag.inBetween.add(linetag);
             attributesTag.inBetween.add(cleftag);
-        } else if (staves == "3") {
+        } else if (stavesInt==3) {
             XMLtag cleftag = new XMLtag("clef number = \"1\"", 3);
             cleftag.outname = "</clef>";
             XMLtag signtag = new XMLtag("sign", 4);
@@ -174,6 +202,7 @@ public class Measure {
             linetag.text = clefLines[0];
             cleftag.inBetween.add(linetag);
             attributesTag.inBetween.add(cleftag);
+
             cleftag = new XMLtag("clef number = \"2\"", 3);
             cleftag.outname = "</clef>";
             signtag = new XMLtag("sign", 4);
@@ -183,18 +212,24 @@ public class Measure {
             linetag.text = clefLines[1];
             cleftag.inBetween.add(linetag);
             attributesTag.inBetween.add(cleftag);
-            XMLtag clefChangeTag = new XMLtag("clef-octave-change",4);
-            clefChangeTag.outname = "/clef-octave-change";
-            clefChangeTag.text = "-1";
-            cleftag.inBetween.add(clefChangeTag);
+
+            cleftag = new XMLtag("clef number = \"3\"", 3);
+            cleftag.outname = "</clef>";
+            signtag = new XMLtag("sign", 4);
+            signtag.text = clefSigns[2];
+            cleftag.inBetween.add(signtag);
+            linetag = new XMLtag("line", 4);
+            linetag.text = clefLines[2];
+            cleftag.inBetween.add(linetag);
+//            XMLtag oct = new XMLtag("clef-octave-change",4);
+//            oct.text = "-3";
+//            cleftag.inBetween.add(oct);
             attributesTag.inBetween.add(cleftag);
+
         }
-//        XMLtag commentTag = new XMLtag("!-- " + Arrays.toString(aList) + "--", 4);
-//        commentTag.outname = "";
-//        measurenumbertag.inBetween.add(commentTag);
+
         for (int li = 0; li < noteList.size(); li++) {
-            //XMLtaglist.get(0).inBetween.add(new XMLtag());
-            //XMLtaglist.get(0).inBetween.get(li) = noteList.get(li).outputNoteXML());
+
             measurenumbertag.inBetween.addAll(noteList.get(li).outputNoteXML());
         }
         return XMLtaglist;
