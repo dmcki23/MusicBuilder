@@ -1,11 +1,35 @@
 import java.util.Arrays;
+/**
+ * Builds the map from MIDI tone number to scale degree of a given key
+ */
 public class Converters {
+    /**
+     * Maps scale degrees to int keyboard number
+     */
     int[][][] degreeToButton = new int[8][2][8];
+    /**
+     * Octaves of each key
+     */
     int[] keyOctaves = new int[88];
+    /**
+     * Initial key C mapping from tone to scale degree
+     */
     int[][][] semitoneKeyboard;
+    /**
+     * All 12 semitones in scale degree form, alters are sharps
+     */
     int[][] tones = new int[][]{{1, 0}, {1, 1}, {2, 0}, {2, 1}, {3, 0}, {4, 0}, {4, 1}, {5, 0}, {5, 1}, {6, 0}, {6, 1}, {7, 0}};
+    /**
+     * All 12 semitones in scale degree form, alters are flats
+     */
     int[][] flatTones = new int[][]{{1, 0}, {2, 1}, {2, 0}, {3, 1}, {3, 0}, {4, 0}, {5, 1}, {5, 0}, {6, 1}, {6, 0}, {7, 1}, {7, 0}};
+    /**
+     * Circle of fifths in both directions
+     */
     int[][] circleFifths = new int[][]{{0,5,2,6,3,7,4},{0,4,7,3,6,2,5}};
+    /**
+     * Generates the initial key C semitoneKeyboard and octave map
+     */
     public Converters() {
         semitoneKeyboard = new int[2][88][2];
 
@@ -40,7 +64,12 @@ public class Converters {
         keyOctaves[1] = 0;
         keyOctaves[2] = 0;
     }
-
+    /**
+     * Applies appropriate sharps and flats to the mapping
+     * @param numAlters number of sharps or flats
+     * @param direction 0 is sharps direction, 1 is flats direction
+     * @return a keyboard-scale degree mapping to the given key
+     */
 
     public int[][] applyKey(int numAlters, int direction) {
         degreeToButton = new int[8][2][7];
@@ -78,6 +107,9 @@ public class Converters {
         }
         return out;
     }
+    /**
+     * Test
+     */
     public void test(){
         System.out.println("As sharps");
         for (int spot = 0; spot < 88; spot++){

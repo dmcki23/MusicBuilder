@@ -4,14 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53a4c0c6-305e-439c-8935-8ab7d8b9c6a2" name="Changes" comment="first upload to github">
+    <list default="true" id="53a4c0c6-305e-439c-8935-8ab7d8b9c6a2" name="Changes" comment="everything checks out, but could not at all get a baritone clef going properly so it's all on treble and bass and viola on alto">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Cadence.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Cadence.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Converters.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Converters.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/MainPanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/MainPanel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Measure.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Measure.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Note.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Note.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Part.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Part.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/PartGenerator.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/PartGenerator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Rhythm.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Rhythm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Scales.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Scales.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/SheetOfMusic.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/SheetOfMusic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/XMLtag.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/XMLtag.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/member-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/serialized-form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output.musicXML" beforeDir="false" afterPath="$PROJECT_DIR$/output.musicXML" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Converters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Converters.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Measure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Measure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PartGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PartGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SheetOfMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SheetOfMusic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/README.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720889580280</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="everything checks out, but could not at all get a baritone clef going properly so it's all on treble and bass and viola on alto">
+      <option name="closed" value="true" />
+      <created>1720926808446</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720926808446</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,6 +175,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="check in" />
     <MESSAGE value="first upload to github" />
-    <option name="LAST_COMMIT_MESSAGE" value="first upload to github" />
+    <MESSAGE value="everything checks out, but could not at all get a baritone clef going properly so it's all on treble and bass and viola on alto" />
+    <option name="LAST_COMMIT_MESSAGE" value="everything checks out, but could not at all get a baritone clef going properly so it's all on treble and bass and viola on alto" />
   </component>
 </project>

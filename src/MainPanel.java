@@ -16,13 +16,37 @@ import javax.swing.JPanel;
  * beginnings of a GUI for this program
  */
 public class MainPanel extends JPanel{
+    /**
+     * Low string notes, guitar bass guitar
+     */
     String[] stringNotes = new String[]{"E","F","G","A","B","C","D","E"};
+    /**
+     * High string notes, bass guitar, guitar
+     */
     String[] highStringNotes =new String[]{"G","A","B","C","D","E","F","G","A","B","C"};
+    /**
+     * Low string notes, 4 string bass guitar
+     */
     String[] fifthStringNotes = new String[]{"B","C","D","E","F","G","A","B"};
+    /**
+     * High string notes on a guitar
+     */
     String[] guitarHighNotes = new String[]{"E","F","G","A","B","C","D","E","F","G","A","B","C"};
+    /**
+     * Low string notes on violin
+     */
     String[] majorGNotes = new String[]{"G","A","B","C","D","E","F","G"};
+    /**
+     * Low string notes on cello and viola
+     */
     String[] violaCelloLow = new String[]{"C","D","E","F","G","A","B","C"};
+    /**
+     * High string notes on cello and viola
+     */
     String[] violaCelloHigh = new String[]{"A","B","C","D","E","F","G","A","B","C","D"};
+    /**
+     * Not significant, used as a dummy variable to distinguish switch cases
+     */
     int[] usedClefs;
     /**
      * Lower left hand corner of fretboard to work with
@@ -52,16 +76,37 @@ public class MainPanel extends JPanel{
      * Swing selection box for the key
      */
     JComboBox keyBox;
+    /**
+     * Instrument selection box
+     */
     JComboBox instument;
     /**
      * Swing rest frequency selection
      */
     JComboBox restFrequency;
+    /**
+     * How many measures in between key changes, if applicable
+     */
     JComboBox keyChangeFrequency;
+    /**
+     * Number of strings on bass, currently not used
+     */
     JComboBox numberStrings;
+    /**
+     * Add a third clef, currently not used
+     */
     JComboBox addClef;
+    /**
+     * Whether to do drop D on the instrument, on non-guitar instruments, it's drop whatever the bottom string is
+     */
     JCheckBox dropD;
+    /**
+     * Low range of notes in integer form relative to the low E on a bass guitar, one of the things that needs changing in a reboot
+     */
     int low;
+    /**
+     * High range of notes in integer form, see low for more
+     */
     int high;
 
 
@@ -186,6 +231,8 @@ public class MainPanel extends JPanel{
                         high = 9;
                         break;
                 }
+                upperBox.setSelectedIndex(upperBox.getItemCount()-1);
+                lowerBox.setSelectedIndex(lowerBox.getItemCount()-1);
 
                 }
         });
@@ -329,7 +376,7 @@ public class MainPanel extends JPanel{
         //this.add(numberStrings);
         this.add(new JLabel("Instrument"));
         this.add(instument);
-        this.add(new JLabel("Drop D"));
+        this.add(new JLabel("Drop D or bottom string minus a whole step"));
         this.add(dropD);
         this.add(new JLabel("Bottom left hand corner"));
         this.add(lowerBox);

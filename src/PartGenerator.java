@@ -326,6 +326,7 @@ public class PartGenerator {
      * @param inbeats number of beats in time signature
      * @param restChance chance of a note being a rest, 1/restChance
      * @param modFrequency how many measures between key modulation, if random is true
+     * @param clef clef to use
      * @return Part list
      */
     public List<Part> generateBass(int lower, int upper, int key, boolean random, int intype, int inbeats, int restChance, int modFrequency, int clef) {
